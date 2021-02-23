@@ -2,7 +2,7 @@
   "min_packer_version": "1.6.3",
   "variables": {
     "photon_ovf_template": "photon.xml.template",
-    "ovftool_deploy_vcenter": "packerbuild.sclab.local",
+    "ovftool_deploy_vcenter": "192.168.30.200",
     "ovftool_deploy_vcenter_username": "administrator@vsphere.local",
     "ovftool_deploy_vcenter_password": "VMware1!"
   },
