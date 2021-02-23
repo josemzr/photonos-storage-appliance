@@ -33,6 +33,9 @@ configureNFS() {
 
     mkdir -p /mnt/nfs
     echo "/mnt/nfs *(no_root_squash,rw,async,no_subtree_check,insecure)" > /etc/exports
+    
+    systemctl enable nfs-server
+    systemctl start nfs-server
 }
 
 
@@ -102,13 +105,19 @@ __CUSTOMIZE_PHOTON__
 
 configureHostname() {
     echo -e "\e[92mConfiguring hostname ..." > /dev/console
-    [ -z "${HOSTNAME}" ] && HOSTNAME=harbor hostnamectl set-hostname harbor  || hostnamectl set-hostname ${HOSTNAME}
+    [ -z "${HOSTNAME}" ] && HOSTNAME=photonos-storage-appliance hostnamectl set-hostname photonos-storage-appliance  || hostnamectl set-hostname ${HOSTNAME}
     echo "${IP_ADDRESS} ${HOSTNAME}" >> /etc/hosts
 }
 
 restartNetwork() {
     echo -e "\e[92mRestarting Network ..." > /dev/console
     systemctl restart systemd-networkd
+}
+
+disableIPTables() {
+    echo -e "\e[92mDisabling iptables ..." > /dev/console
+    systemctl disable iptables
+    systemctl stop iptables
 }
 
 configureRootPassword() {
@@ -145,6 +154,7 @@ if [ -z "${IP_ADDRESS}" ] || [ -z "${NETMASK}" ] || [ -z "${GATEWAY}" ]; then
     configureDHCP
     configureHostname
     restartNetwork
+    disableIPTables
     configureRootPassword
     configureNFS
     configureMinIO
@@ -155,6 +165,7 @@ if [ -z "${IP_ADDRESS}" ] || [ -z "${NETMASK}" ] || [ -z "${GATEWAY}" ]; then
     configureStaticNetwork
     configureHostname
     restartNetwork
+    disableIPTables
     configureRootPassword
     configureNFS
     configureMinIO
