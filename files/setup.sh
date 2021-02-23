@@ -21,7 +21,7 @@ set -euo pipefail
     ROOT_PASSWORD=$(echo "${ROOT_PASSWORD_PROPERTY}" | awk -F 'oe:value="' '{print $2}' | awk -F '"' '{print $1}')
 
 configureNFS() {
-    echo -e "\e[92mConfiguring NFS ..." > /dev/console
+    echo -e "\e[92mConfiguring NFS server..." > /dev/console
 
     mkdir -p /mnt/nfs
 
@@ -40,7 +40,7 @@ configureNFS() {
 
 
 configureMinIO() {
-    echo -e "\e[92mConfiguring MinIO ..." > /dev/console
+    echo -e "\e[92mConfiguring MinIO server..." > /dev/console
 
     mkdir -p /mnt/s3
 
@@ -52,25 +52,7 @@ configureMinIO() {
 
     mkdir -p /mnt/s3
 
-    # Prepare PhotonOS for MinIO
-    useradd --system minio-user --shell /sbin/nologin
-    groupadd minio-user
-    curl -O https://dl.minio.io/server/minio/release/linux-amd64/minio
-    mv minio /usr/local/bin
-    chmod +x /usr/local/bin/minio
-    chown minio-user:minio-user /usr/local/bin/minio
-
-    mkdir /etc/minio
-    chown minio-user:minio-user /etc/minio
-    chown minio-user:minio-user /mnt/s3
-
-    echo "MINIO_VOLUMES="/mnt/s3"" > /etc/default/minio
-    echo "MINIO_OPTS="-C /etc/minio"" >> /etc/default/minio
-
-    # Configure MinIO Systemd Service
-    setcap 'cap_net_bind_service=+ep' /usr/local/bin/minio
-    curl -O https://raw.githubusercontent.com/minio/minio-service/master/linux-systemd/minio.service
-    mv minio.service /etc/systemd/system
+    # Enabling MinIO in Systemd
     systemctl daemon-reload
     systemctl enable minio
     systemctl start minio
