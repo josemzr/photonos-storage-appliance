@@ -35,8 +35,8 @@ chown minio-user:minio-user /usr/local/bin/minio
 mkdir /etc/minio
 mkdir -p /mnt/s3
 
-chown minio-user:minio-user /etc/minio
-chown minio-user:minio-user /mnt/s3
+chown -R minio-user:minio-user /etc/minio
+chown -R minio-user:minio-user /mnt/s3
 
 echo "MINIO_VOLUMES="/mnt/s3"" > /etc/default/minio
 echo "MINIO_OPTS="-C /etc/minio"" >> /etc/default/minio
