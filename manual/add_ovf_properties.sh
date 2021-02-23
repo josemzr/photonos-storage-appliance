@@ -23,6 +23,7 @@ else
     sed -i 's#ovf:capacity="1"#ovf:capacity="${disk2size}"#g' ${OVF_PATH}/${PHOTON_APPLIANCE_NAME}.ovf
     sed -i 's#ovf:capacity="2"#ovf:capacity="${disk2size2}"#g' ${OVF_PATH}/${PHOTON_APPLIANCE_NAME}.ovf
     sed -i 's/ovf:fileRef="file2"//g' ${OVF_PATH}/${PHOTON_APPLIANCE_NAME}.ovf
+    sed -i 's/ovf:fileRef="file3"//g' ${OVF_PATH}/${PHOTON_APPLIANCE_NAME}.ovf
     sed -i '/vmw:ExtraConfig.*/d' ${OVF_PATH}/${PHOTON_APPLIANCE_NAME}.ovf
 fi
 
