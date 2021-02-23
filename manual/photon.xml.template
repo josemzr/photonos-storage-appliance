@@ -41,6 +41,7 @@
         <Property ovf:key="disk2size" ovf:runtimeConfigurable="false" ovf:type="int" ovf:qualifiers="MinValue(1) MaxValue(10000)" ovf:value="60" ovf:userConfigurable="true">
             <Label>MinIO Data Volume Size</Label>
             <Description>The size of the MinIO data disk in gigabytes.</Description>
+        </Property>
         <Category>zDebug</Category>
         <Property ovf:key="guestinfo.debug" ovf:type="boolean" ovf:userConfigurable="true" ovf:value="false">
             <Label>Debugging</Label>
