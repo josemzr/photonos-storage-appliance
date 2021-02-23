@@ -38,7 +38,7 @@
             <Label>NFS Data Volume Size</Label>
             <Description>The size of the NFS data disk in gigabytes.</Description>
         </Property>
-        <Property ovf:key="disk2size" ovf:runtimeConfigurable="false" ovf:type="int" ovf:qualifiers="MinValue(1) MaxValue(10000)" ovf:value="60" ovf:userConfigurable="true">
+        <Property ovf:key="disk2size2" ovf:runtimeConfigurable="false" ovf:type="int" ovf:qualifiers="MinValue(1) MaxValue(10000)" ovf:value="60" ovf:userConfigurable="true">
             <Label>MinIO Data Volume Size</Label>
             <Description>The size of the MinIO data disk in gigabytes.</Description>
         </Property>
