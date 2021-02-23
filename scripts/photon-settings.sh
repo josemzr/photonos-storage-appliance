@@ -33,6 +33,8 @@ chmod +x /usr/local/bin/minio
 chown minio-user:minio-user /usr/local/bin/minio
 
 mkdir /etc/minio
+mkdir -p /mnt/s3
+
 chown minio-user:minio-user /etc/minio
 chown minio-user:minio-user /mnt/s3
 
