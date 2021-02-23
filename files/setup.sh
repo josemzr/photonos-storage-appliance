@@ -50,8 +50,6 @@ configureMinIO() {
     mount -o defaults "${DISK}1" /mnt/s3
     echo ""${DISK}1"     /mnt/s3         ext3 defaults 0 2" >> /etc/fstab
 
-    mkdir -p /mnt/s3
-
     # Enabling MinIO in Systemd
     systemctl daemon-reload
     systemctl enable minio
