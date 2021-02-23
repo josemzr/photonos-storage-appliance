@@ -21,7 +21,7 @@ set -euo pipefail
     ROOT_PASSWORD=$(echo "${ROOT_PASSWORD_PROPERTY}" | awk -F 'oe:value="' '{print $2}' | awk -F '"' '{print $1}')
 
 configureNFS() {
-    echo -e "\e[92mConfiguring NFS server..." > /dev/console
+    echo -e "\e[92mConfiguring NFS server ..." > /dev/console
 
     mkdir -p /mnt/nfs
    
@@ -39,7 +39,7 @@ configureNFS() {
 
 
 configureMinIO() {
-    echo -e "\e[92mConfiguring MinIO server..." > /dev/console
+    echo -e "\e[92mConfiguring MinIO server ..." > /dev/console
 
     DISK=/dev/sdc
     printf "o\nn\np\n1\n\n\nw\n" | fdisk "${DISK}"
@@ -47,6 +47,8 @@ configureMinIO() {
     mount -o defaults "${DISK}1" /mnt/s3
     echo ""${DISK}1"     /mnt/s3         ext3 defaults 0 2" >> /etc/fstab
 
+    chown -R minio-user:minio-user /mnt/s3
+    
     # Enabling MinIO in Systemd
     systemctl daemon-reload
     systemctl enable minio
@@ -54,7 +56,7 @@ configureMinIO() {
 }
 
 configureDHCP() {
-    echo -e "\e[92mConfiguring network using DHCP..." > /dev/console
+    echo -e "\e[92mConfiguring network using DHCP ..." > /dev/console
     cat > /etc/systemd/network/${NETWORK_CONFIG_FILE} << __CUSTOMIZE_PHOTON__
 [Match]
 Name=e*
