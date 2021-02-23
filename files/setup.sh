@@ -24,14 +24,13 @@ configureNFS() {
     echo -e "\e[92mConfiguring NFS server..." > /dev/console
 
     mkdir -p /mnt/nfs
-
+   
     DISK=/dev/sdb
     printf "o\nn\np\n1\n\n\nw\n" | fdisk "${DISK}"
     mkfs.ext3 -L nfs "${DISK}1"
     mount -o defaults "${DISK}1" /mnt/nfs
     echo ""${DISK}1"     /mnt/nfs         ext3 defaults 0 2" >> /etc/fstab
 
-    mkdir -p /mnt/nfs
     echo "/mnt/nfs *(no_root_squash,rw,async,no_subtree_check,insecure)" > /etc/exports
     
     systemctl enable nfs-server
@@ -41,8 +40,6 @@ configureNFS() {
 
 configureMinIO() {
     echo -e "\e[92mConfiguring MinIO server..." > /dev/console
-
-    mkdir -p /mnt/s3
 
     DISK=/dev/sdc
     printf "o\nn\np\n1\n\n\nw\n" | fdisk "${DISK}"
