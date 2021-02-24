@@ -101,8 +101,8 @@ Export list for storage:
 
 MinIO will also be installed and available in the port 9000. It can be accessed in the URL http://YOUR-IP:9000 (where YOUR_IP is your selected IP, either static or set dynamically with DHCP):
 
-MinIO username: minioadmin
-MinIO password: minioadmin
+- MinIO username: minioadmin
+- MinIO password: minioadmin
 
 ## Acknowledgements
 
