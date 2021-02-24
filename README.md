@@ -89,6 +89,21 @@ An additional flag can be configured for virtual machine deployment debugging:
 
 ---
 
+## Storage parameters
+
+After the VM boots, the NFS share will be available on /mnt/nfs, which can be verified by using:
+
+```
+root@storage [ ~ ]# showmount -e
+Export list for storage:
+/mnt/nfs *
+```
+
+MinIO will also be installed and available in the port 9000. It can be accessed in the URL http://YOUR-IP:9000 (where YOUR_IP is your selected IP, either static or set dynamically with DHCP):
+
+MinIO username: minioadmin
+MinIO password: minioadmin
+
 ## Acknowledgements
 
 
