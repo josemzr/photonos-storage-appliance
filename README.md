@@ -53,7 +53,7 @@ The following network parameters can be configured when deploying the OVA in vSp
 
 | Value          | Description              | Default value |
 |----------------|--------------------------|---------------|
-| Hostname       | Hostname for the VM.     | harbor        |
+| Hostname       | Hostname for the VM.     | photonos-storage-appliance        |
 | IP Address     | IP address of the VM     | (DHCP)        |
 | Netmask Prefix | Netmask in CIDR notation | (DHCP)        |
 | Gateway        | Gateway of the VM        | (DHCP)        |
