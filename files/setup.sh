@@ -2,8 +2,6 @@
 
 # Bootstrap script
 
-set -euo pipefail
-
     HOSTNAME_PROPERTY=$(vmtoolsd --cmd "info-get guestinfo.ovfEnv" | grep "guestinfo.hostname")
     IP_ADDRESS_PROPERTY=$(vmtoolsd --cmd "info-get guestinfo.ovfEnv" | grep "guestinfo.ipaddress")
     NETMASK_PROPERTY=$(vmtoolsd --cmd "info-get guestinfo.ovfEnv" | grep "guestinfo.netmask")
@@ -57,7 +55,7 @@ configureMinIO() {
 
 configureDHCP() {
     echo -e "\e[92mConfiguring network using DHCP ..." > /dev/console
-    cat > /etc/systemd/network/${NETWORK_CONFIG_FILE} << __CUSTOMIZE_PHOTON__
+    cat > /etc/systemd/network/10-ovfenv.network << __CUSTOMIZE_PHOTON__
 [Match]
 Name=e*
 
@@ -65,12 +63,14 @@ Name=e*
 DHCP=yes
 IPv6AcceptRA=no
 __CUSTOMIZE_PHOTON__
+
+chmod 644 /etc/systemd/network/10-ovfenv.network
 }
 
 configureStaticNetwork() {
 
     echo -e "\e[92mConfiguring Static IP Address ..." > /dev/console
-    cat > /etc/systemd/network/${NETWORK_CONFIG_FILE} << __CUSTOMIZE_PHOTON__
+    cat > /etc/systemd/network/10-ovfenv.network << __CUSTOMIZE_PHOTON__
 [Match]
 Name=e*
 
@@ -80,6 +80,8 @@ Gateway=${GATEWAY}
 DNS=${DNS_SERVER}
 Domain=${DNS_DOMAIN}
 __CUSTOMIZE_PHOTON__
+
+chmod 644 /etc/systemd/network/10-ovfenv.network
 }
 
 configureHostname() {
